@@ -10,23 +10,28 @@ source:
   sha256: 59967846e1d976508db30ff65987e9c1e6c024ec9c095849608ee8913b96d3ff
 
 build:
-  number: 2
+  number: 3
   skip: true  # [py<39 or win]
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv'
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython                                 # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
+    - ninja                                  # [unix]
+    - pkg-config                             # [unix]
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
   host:
-    - pkg-config
     - python
+    - python-build
+    - pip
     - meson-python
     - numpy
     - fluidfft-builder >=0.0.1
     - cython
     - transonic >=0.6.1
-    - pip
     - fftw
   run:
     - python
