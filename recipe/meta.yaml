@@ -42,6 +42,7 @@ test:
   imports:
     - fluidfft_fftw
   commands:
+    - pip install setuptools
     - pip check
   requires:
     - pip
