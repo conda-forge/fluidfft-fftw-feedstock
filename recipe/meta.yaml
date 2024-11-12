@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fluidfft_fftw-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/fluidfft_fftw-{{ version }}.tar.gz
   sha256: 59967846e1d976508db30ff65987e9c1e6c024ec9c095849608ee8913b96d3ff
 
 build:
-  number: 3
+  number: 4
   skip: true  # [py<39 or win]
 
 requirements:
@@ -42,6 +42,7 @@ test:
   imports:
     - fluidfft_fftw
   commands:
+    - pip install setuptools
     - pip check
   requires:
     - pip
